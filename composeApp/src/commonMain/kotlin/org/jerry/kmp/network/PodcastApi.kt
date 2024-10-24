@@ -10,10 +10,10 @@ import org.jerry.kmp.data.response.BasePaginationResponse
 import org.jerry.kmp.utilities.Resource
 import org.jerry.kmp.utilities.ThrowableWithMessage
 
-class PodcastApi(
+open class PodcastApi(
     private val client: HttpClient
 ) {
-    suspend fun getTopList(): Resource<BasePaginationResponse<PodcastDTO>> {
+    open suspend fun getTopList(): Resource<BasePaginationResponse<PodcastDTO>> {
         return try {
             val response = client.get("v1/toplist") {
                 contentType(ContentType.Application.Json)
