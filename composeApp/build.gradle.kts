@@ -1,5 +1,4 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -10,6 +9,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
 
     alias(libs.plugins.kotlinx.serialization)
+    id("dev.mokkery") version "2.4.0"
 }
 
 kotlin {
@@ -73,6 +73,8 @@ kotlin {
             implementation(libs.ktor.client.mock)
             implementation(libs.kotlinx.coroutines.test)
         }
+
+
     }
 }
 

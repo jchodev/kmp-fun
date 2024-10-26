@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ErrorResponse(
+data class ApiErrorResponse(
     @SerialName("code")
     val code: Int,
     @SerialName("message")

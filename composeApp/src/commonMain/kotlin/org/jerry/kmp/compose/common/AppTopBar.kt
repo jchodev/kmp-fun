@@ -14,7 +14,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import kmp_fun.composeapp.generated.resources.Res
+import kmp_fun.composeapp.generated.resources.hint_back
 import org.jerry.kmp.contants.TEST_TAG_TITLE
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,7 +46,7 @@ fun AppTopBar(
                 }) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = "", //stringResource(Res.string.hint_back),
+                        contentDescription = stringResource(Res.string.hint_back),
                     )
                 }
             }

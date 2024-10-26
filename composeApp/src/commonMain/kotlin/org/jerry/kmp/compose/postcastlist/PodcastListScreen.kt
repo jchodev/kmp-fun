@@ -19,10 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kmp_fun.composeapp.generated.resources.Res
+import kmp_fun.composeapp.generated.resources.podcast_list_title
 import org.jerry.kmp.compose.common.AppTopBar
 import org.jerry.kmp.data.Podcast
 import org.jerry.kmp.viewmodel.PodcastListState
 import org.jerry.kmp.viewmodel.PodcastListViewModel
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -59,7 +62,7 @@ fun PodcastListScreen(
             AppTopBar (
                 modifier = Modifier
                     .shadow(elevation = 4.dp),
-                title = "",//stringResource(id = R.string.podcast_list_title),
+                title = stringResource(Res.string.podcast_list_title),
                 showBack = false,
                 actions = {
                     IconButton(onClick = onRefresh) {
