@@ -9,6 +9,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
+import kmp_fun.composeApp.BuildConfig
 import kotlinx.serialization.json.Json
 import org.jerry.kmp.contants.BASE_URL
 
@@ -38,7 +39,7 @@ val networkModule = module {
                 }
             }
             defaultRequest {
-                url(BASE_URL)
+                url(BuildConfig.BASE_URL)
             }
         }
     }

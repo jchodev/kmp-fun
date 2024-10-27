@@ -10,6 +10,11 @@ plugins {
 
     alias(libs.plugins.kotlinx.serialization)
     id("dev.mokkery") version "2.4.0"
+    id("com.github.gmazzo.buildconfig") version "5.5.0"
+}
+
+buildConfig {
+    buildConfigField("String", "BASE_URL", "\"https://the-podcasts.fly.dev/\"")
 }
 
 kotlin {
