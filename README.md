@@ -1,4 +1,4 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+A simple MVVM Kotlin Multiplatform project - Get podcast and episode data from server 
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
@@ -12,3 +12,27 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
+## Project Structure:
+It follows the basic project structure established by the official Android app  [sunflower](https://github.com/android/sunflower)
+
+## Screen Flow:
+<img width="647" alt="image" src="https://github.com/user-attachments/assets/21e2bf94-d2c4-4fd6-93b9-f018f08faf2d">
+
+## Libraries 
+| Library           | Used For                  | Remark |
+|-------------------|---------------------------| ------ |
+|[koin](https://insert-koin.io/docs/reference/koin-mp/kmp/)|DI| --- |
+|[ktor](https://ktor.io/) |Network| --- |
+|   [Coil](https://coil-kt.github.io/coil/)             | Image display           | ----| 
+|   [ethauvin-urlencoder](https://github.com/ethauvin/urlencoder)             | Url encode           | ----| 
+|   [valentinilk-shimmer](https://github.com/valentinilk/compose-shimmer)             | Display shimmer effect on compose           | ----| 
+
+## Completed
+1. Unit test - Episode List (ViewModel, repository, api)
+2. Some UI test of compose level
+
+## TODO
+1. Implement [Firebase Crashlyics](https://firebase.google.com/docs/crashlytics)
+2. Full testing (UI / unit test)
+3. ...
