@@ -1,4 +1,4 @@
-package org.jerry.kmp.viewmodel
+package org.jerry.kmp.viewmodel.podcastlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,6 +13,7 @@ import org.jerry.kmp.utilities.Resource
 class PodcastListViewModel(
     private val podcastRepository: PodcastRepository,
 ): ViewModel() {
+
     private val _podcastListState = MutableStateFlow(PodcastListState())
     val podcastListState = _podcastListState.asStateFlow()
 

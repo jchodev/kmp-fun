@@ -23,8 +23,8 @@ import kmp_fun.composeapp.generated.resources.Res
 import kmp_fun.composeapp.generated.resources.podcast_list_title
 import org.jerry.kmp.compose.common.AppTopBar
 import org.jerry.kmp.data.Podcast
-import org.jerry.kmp.viewmodel.PodcastListState
-import org.jerry.kmp.viewmodel.PodcastListViewModel
+import org.jerry.kmp.viewmodel.podcastlist.PodcastListState
+import org.jerry.kmp.viewmodel.podcastlist.PodcastListViewModel
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 

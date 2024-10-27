@@ -1,4 +1,19 @@
 <resources>
     <string name="hint_back">Back</string>
+
     <string name="podcast_list_title">Top 40 podcasts</string>
+    <string name="episodes">Episodes</string>
+    <string name="invalid_data">Invalid Data</string>
+
+    <string name="duration">Duration: %1$s</string>
+    <string name="release_on">Released On: %1$s</string>
+    <string name="play">Play %1$s</string>
+    <string name="pause">Pause %1$s</string>
+    <string name="play_video">Play Video</string>
+
+    <string name="close">Close</string>
+    <string name="retry">Retry</string>
+    <string name="error">Error</string>
+    <string name="error_with">Error: %1$s</string>
+    <string name="refresh">Refresh</string>
 </resources>

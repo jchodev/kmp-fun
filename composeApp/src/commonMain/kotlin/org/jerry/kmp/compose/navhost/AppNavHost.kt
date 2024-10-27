@@ -13,7 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.jerry.kmp.compose.postcastlist.PodcastListScreen
-import org.jerry.kmp.viewmodel.PodcastListViewModel
+import org.jerry.kmp.viewmodel.podcastlist.PodcastListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
