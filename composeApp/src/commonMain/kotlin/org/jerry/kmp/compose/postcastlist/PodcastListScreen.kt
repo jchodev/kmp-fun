@@ -21,7 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kmp_fun.composeapp.generated.resources.Res
 import kmp_fun.composeapp.generated.resources.podcast_list_title
+import kmp_fun.composeapp.generated.resources.refresh
 import org.jerry.kmp.compose.common.AppTopBar
+import org.jerry.kmp.compose.common.ErrorDialog
 import org.jerry.kmp.data.Podcast
 import org.jerry.kmp.viewmodel.podcastlist.PodcastListState
 import org.jerry.kmp.viewmodel.podcastlist.PodcastListViewModel
@@ -67,7 +69,7 @@ fun PodcastListScreen(
                 actions = {
                     IconButton(onClick = onRefresh) {
                         Icon(Icons.Filled.Refresh,
-                            contentDescription = "", //stringResource(id = R.string.refresh)
+                            contentDescription = stringResource(Res.string.refresh)
                         )
                     }
                 }
@@ -82,15 +84,15 @@ fun PodcastListScreen(
             )
 
             if (podcastListState.isLoading) {
-                //LoadingCompose()
+                PodcastListLoadingScreen()
             }
 
             podcastListState.errorMessage?.let {
-//                ErrorDialog(
-//                    text = it,
-//                    onRetryRequest = onRefresh,
-//                    onDismissRequest = onErrorDismissRequest,
-//                )
+                ErrorDialog(
+                    text = it,
+                    onRetryRequest = onRefresh,
+                    onDismissRequest = onErrorDismissRequest,
+                )
             }
         }
     }

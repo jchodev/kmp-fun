@@ -11,7 +11,6 @@ import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
 import kmp_fun.composeApp.BuildConfig
 import kotlinx.serialization.json.Json
-import org.jerry.kmp.contants.BASE_URL
 
 private const val TIMEOUT = 30000L
 val networkModule = module {

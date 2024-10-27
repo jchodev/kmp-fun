@@ -59,6 +59,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.compose.navigation)
 
             implementation(libs.koin.compose)
             implementation(libs.koin.composeVM)
@@ -66,6 +67,10 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.coil3)
+
+            implementation(libs.kotlinx.datetime)
+            implementation("net.thauvin.erik.urlencoder:urlencoder-lib:1.6.0")
+            implementation(libs.compose.shimmer)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

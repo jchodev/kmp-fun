@@ -3,6 +3,7 @@ package org.jerry.kmp.utilities
 sealed class Resource<T>(val data: T?, val throwableWithMessage: ThrowableWithMessage?) {
     class Success<T>(data: T) : Resource<T>(data, null)
     class Error<T>(throwableWithMessage: ThrowableWithMessage) : Resource<T>(null, throwableWithMessage)
+    companion object
 }
 
 data class ThrowableWithMessage(
