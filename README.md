@@ -27,6 +27,7 @@ It follows the basic project structure established by the official Android app  
 |   [Coil](https://coil-kt.github.io/coil/)             | Image display           | ----| 
 |   [ethauvin-urlencoder](https://github.com/ethauvin/urlencoder)             | Url encode           | ----| 
 |   [valentinilk-shimmer](https://github.com/valentinilk/compose-shimmer)             | Display shimmer effect on compose           | ----| 
+|   [ROOM](https://developer.android.com/kotlin/multiplatform/room)            | local DB (RDB)           | ----| 
 
 ## Completed
 1. Unit test - Episode List (ViewModel, repository, api)
