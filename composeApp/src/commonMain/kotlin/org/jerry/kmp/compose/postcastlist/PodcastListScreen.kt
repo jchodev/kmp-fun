@@ -25,6 +25,7 @@ import kmp_fun.composeapp.generated.resources.refresh
 import org.jerry.kmp.compose.common.AppTopBar
 import org.jerry.kmp.compose.common.ErrorDialog
 import org.jerry.kmp.data.Podcast
+import org.jerry.kmp.data.database.entity.Favourite
 import org.jerry.kmp.viewmodel.podcastlist.PodcastListState
 import org.jerry.kmp.viewmodel.podcastlist.PodcastListViewModel
 import org.jetbrains.compose.resources.stringResource
@@ -36,8 +37,13 @@ fun PodcastListScreen(
     onPodcastClick: (Podcast) -> Unit = {},
 ) {
     val state = viewModel.podcastListState.collectAsStateWithLifecycle().value
+    val favourites = viewModel.favourites.collectAsStateWithLifecycle().value
     PodcastListScreen(
         podcastListState = state,
+        favourites = favourites,
+        onFavouriteClick = {
+            viewModel.toggleFavourite(it)
+        },
         onPodcastClick = {
             onPodcastClick.invoke(it)
         },
@@ -47,6 +53,7 @@ fun PodcastListScreen(
         onErrorDismissRequest = {
             viewModel.clearError()
         }
+
     )
 }
 
@@ -55,6 +62,8 @@ fun PodcastListScreen(
 fun PodcastListScreen(
     podcastListState: PodcastListState,
     onPodcastClick: (Podcast) -> Unit,
+    favourites: List<Favourite>,
+    onFavouriteClick: (Long) -> Unit,
     onRefresh: () -> Unit,
     onErrorDismissRequest: () -> Unit,
 ) {
@@ -80,7 +89,9 @@ fun PodcastListScreen(
 
             PodcastListScreenContent(
                 podcasts = podcastListState.data,
-                onPodcastClick = onPodcastClick
+                onPodcastClick = onPodcastClick,
+                favourites = favourites,
+                onFavouriteClick = onFavouriteClick
             )
 
             if (podcastListState.isLoading) {
@@ -101,7 +112,9 @@ fun PodcastListScreen(
 @Composable
 private fun PodcastListScreenContent(
     podcasts: List<Podcast> = emptyList(),
+    favourites: List<Favourite> = emptyList(),
     onPodcastClick: (Podcast) -> Unit = {},
+    onFavouriteClick: (Long) -> Unit = {},
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -114,11 +127,12 @@ private fun PodcastListScreenContent(
             items = podcasts,
             key = { it.id }
         ) { podcast ->
+            val isFavourite = favourites.any { it.podcastId == podcast.id }
             PodcastListItemView(
                 podcast = podcast,
-                onClick = {
-                    onPodcastClick.invoke(podcast)
-                }
+                isFavourite = isFavourite,
+                onFavouriteClick = { onFavouriteClick(podcast.id) },
+                onClick = { onPodcastClick(podcast) }
             )
         }
     }

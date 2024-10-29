@@ -26,8 +26,6 @@ import kmp_fun.composeapp.generated.resources.Res
 import kmp_fun.composeapp.generated.resources.compose_multiplatform
 import okio.FileSystem
 import org.jerry.kmp.compose.AppContent
-import org.jerry.kmp.di.appModule
-import org.koin.compose.KoinApplication
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
@@ -38,11 +36,11 @@ fun App() {
         getAsyncImageLoader(context)
     }
 
-    KoinApplication (
-        application = {
-            modules(appModule)
-        }
-    ) {
+//    KoinApplication (
+//        application = {
+//            modules(appModule)
+//        }
+//    ) {
 //        MaterialTheme {
 //            var showContent by remember { mutableStateOf(false) }
 //            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
@@ -61,8 +59,11 @@ fun App() {
 //                }
 //            }
 //        }
+    MaterialTheme {
         AppContent()
+        //Text("this is text")
     }
+    //}
 }
 
 fun getAsyncImageLoader(context: PlatformContext) =
@@ -77,3 +78,5 @@ fun newDiskCache(): DiskCache {
         .maxSizeBytes(1024L * 1024 * 1024) // 512MB
         .build()
 }
+
+

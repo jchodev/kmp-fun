@@ -11,6 +11,10 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     id("dev.mokkery") version "2.4.0"
     id("com.github.gmazzo.buildconfig") version "5.5.0"
+
+    alias(libs.plugins.kspCompose)
+    alias(libs.plugins.room)
+    //alias(libs.plugins.kotlinCocoapods)
 }
 
 buildConfig {
@@ -18,6 +22,11 @@ buildConfig {
 }
 
 kotlin {
+
+    sourceSets.commonMain {
+        kotlin.srcDir("build/generated/ksp/metadata")
+    }
+
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -46,6 +55,8 @@ kotlin {
             implementation(libs.koin.androidx.compose)
 
             implementation(libs.ktor.client.okhttp)
+
+            implementation(libs.room.runtime.android)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.ios)
@@ -71,6 +82,9 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation("net.thauvin.erik.urlencoder:urlencoder-lib:1.6.0")
             implementation(libs.compose.shimmer)
+
+            implementation(libs.room.runtime)
+            implementation(libs.sqlite.bundled)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -122,7 +136,18 @@ android {
     }
 }
 
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
 dependencies {
     debugImplementation(compose.uiTooling)
+    add("kspCommonMainMetadata", libs.room.compiler)
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata" ) {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
 }
 
