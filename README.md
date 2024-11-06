@@ -51,7 +51,6 @@ A cross-platform mobile application for browsing and bookmarking podcasts, built
 - Features:
   - Podcast listings
   - Episode details
-  - Search functionality
 - Implementation: Ktor HTTP Client
 
 ### Local Storage
