@@ -26,7 +26,7 @@ class FavouriteRepositoryImplTest {
     }
 
     @Test
-    fun `test FavouriteRepositoryImpl getFavourites successfully`() = runTest {
+    fun testFavouriteRepositoryImplGetFavouritesSuccessfully() = runTest {
         //Given
         everySuspend { dao.getAllFavourites() } returns MockStubs.mockFavourites
 
@@ -37,7 +37,7 @@ class FavouriteRepositoryImplTest {
     }
 
     @Test
-    fun `test FavouriteRepositoryImpl getFavourites error`() = runTest {
+    fun testFavouriteRepositoryImplGetFavouritesError() = runTest {
         //Given
         everySuspend { dao.getAllFavourites() } throws MockStubs.mockNormalException
 

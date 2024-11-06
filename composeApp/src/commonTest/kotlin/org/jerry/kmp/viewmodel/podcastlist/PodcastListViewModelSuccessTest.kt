@@ -42,7 +42,7 @@ class PodcastListViewModelSuccessTest {
     }
 
     @Test
-    fun `init triggers loading state and fetches data`() = runTest {
+    fun testInitTriggersLoadingStateAndFetchesData() = runTest {
         // When - init is called automatically
         testDispatcher.scheduler.advanceUntilIdle()
         val state = viewModel.podcastListState.first()

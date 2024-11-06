@@ -30,14 +30,14 @@ class PodcastApiImplTest {
     }
 
     @Test
-    fun `getTopList returns success`() = runTest {
+    fun testGetTopListReturnsSuccess() = runTest {
         // When
         val result = api.getTopList()
         assertEquals(mockSuccessPodcastListResponse, result)
     }
 
     @Test
-    fun `getTopList returns fail`() = runTest {
+    fun testGetTopListReturnsFail() = runTest {
         mockEngine = MockEngine { request ->
             respond(
                 content = "Error",

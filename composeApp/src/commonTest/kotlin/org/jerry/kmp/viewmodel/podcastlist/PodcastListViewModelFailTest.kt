@@ -35,7 +35,7 @@ class PodcastListViewModelFailTest {
     }
 
     @Test
-    fun `test fetch podcast list from server error`() = runTest {
+    fun testFetchPodcastListFromServerError() = runTest {
         everySuspend { podcastRepository.getTopList() } returns flowOf(
             mockErrorPodcastListResourceDTO
         )
@@ -56,7 +56,7 @@ class PodcastListViewModelFailTest {
     }
 
     @Test
-    fun `test fetch favourites error`() = runTest {
+    fun testFetchFavouritesError() = runTest {
         everySuspend { podcastRepository.getTopList() } returns flowOf(
             mockSuccessPodcastListResourceDTO
         )

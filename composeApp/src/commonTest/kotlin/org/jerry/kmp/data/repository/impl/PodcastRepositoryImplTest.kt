@@ -25,7 +25,7 @@ class PodcastRepositoryImplTest {
     }
 
     @Test
-    fun `getTopList successfully`() = runTest {
+    fun testGetTopListSuccessfully() = runTest {
         //Given
         everySuspend { api.getTopList() } returns MockStubs.mockSuccessPodcastListResponse
 
@@ -40,7 +40,7 @@ class PodcastRepositoryImplTest {
     }
 
     @Test
-    fun `getTopList Error`() = runTest {
+    fun testGetTopListError() = runTest {
         //Given
         everySuspend { api.getTopList() } throws MockStubs.mockNormalException
 
