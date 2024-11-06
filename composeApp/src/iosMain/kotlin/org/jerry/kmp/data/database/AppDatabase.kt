@@ -7,7 +7,7 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.IO
 
 fun getDatabaseBuilder(): AppDatabase {
-    val dbFile = "${NSHomeDirectory()}/mrx_note.db"
+    val dbFile = "${NSHomeDirectory()}/podcast_app.db"
     return Room.databaseBuilder<AppDatabase>(
         name = dbFile,
         factory = { AppDatabase::class.instantiateImpl() }
