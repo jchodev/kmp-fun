@@ -6,7 +6,7 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.Dispatchers
 
 fun getDatabaseBuilder(ctx: Context): AppDatabase {
-    val dbFile = ctx.getDatabasePath("mrx_note.db")
+    val dbFile = ctx.getDatabasePath("podcast_app.db")
     return Room.databaseBuilder<AppDatabase>(ctx, dbFile.absolutePath)
         .setDriver(BundledSQLiteDriver())
         .setQueryCoroutineContext(Dispatchers.IO)

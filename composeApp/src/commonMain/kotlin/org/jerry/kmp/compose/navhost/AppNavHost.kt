@@ -14,8 +14,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import multiplatform.network.cmptoast.showToast
 import org.jerry.kmp.compose.podcastdetail.PodcastDetailScreen
-import org.jerry.kmp.compose.postcastlist.PodcastListScreen
+import org.jerry.kmp.compose.podcastlist.PodcastListScreen
 import org.jerry.kmp.data.Podcast
 import org.jerry.kmp.viewmodel.podcastlist.PodcastListViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -53,6 +54,9 @@ fun AppNavHost(
                     selectedPodcast = podcast,
                     onBackClick = { navController.navigateUp() },
                     onEpisodeClick = {
+                        showToast(
+                            message = "Play Episodes will be release soon."
+                        )
                         //navController.navigate(it)
                     }
                 )

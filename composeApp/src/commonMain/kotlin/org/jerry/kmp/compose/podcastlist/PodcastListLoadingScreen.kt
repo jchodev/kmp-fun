@@ -1,6 +1,7 @@
-package org.jerry.kmp.compose.postcastlist
+package org.jerry.kmp.compose.podcastlist
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
@@ -12,7 +13,7 @@ import org.jerry.kmp.contants.TEST_TAG_LOADING
 @Composable
 fun PodcastListLoadingScreen() {
     LazyVerticalGrid(
-        modifier = Modifier.testTag(TEST_TAG_LOADING),
+        modifier = Modifier.fillMaxWidth().testTag(TEST_TAG_LOADING),
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(
             horizontal = 12.dp,

@@ -1,39 +1,98 @@
-A simple MVVM Kotlin Multiplatform project - Get podcast and episode data from server 
+# Podcast App
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+A cross-platform mobile application for browsing and bookmarking podcasts, built with Kotlin Multiplatform.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Features
+- Browse curated podcast listings
+- View detailed podcast information and episodes
+- Bookmark favorite podcasts
+- Cross-platform support (iOS & Android)
+
+## Technical Architecture
+
+### Core Technology Stack
+- **Kotlin Multiplatform (KMP)** for shared codebase
+- **MVVM Architecture Pattern**
+- **Repository Pattern** for data management
+- **Jetpack Compose** for UI
+
+### Key Libraries
+
+| Category | Library | Purpose |
+|----------|----------|---------|
+| Dependency Injection | [Koin](https://insert-koin.io/docs/reference/koin-mp/kmp/) | Modular DI framework |
+| Networking | [Ktor](https://ktor.io/) | API communication |
+| Image Loading | [Coil](https://coil-kt.github.io/coil/) | Efficient image loading/caching |
+| Local Storage | [Room](https://developer.android.com/kotlin/multiplatform/room) | SQLite database wrapper |
+| UI Components | [Compose Shimmer](https://github.com/valentinilk/compose-shimmer) | Loading state animations |
+| Utilities | [URL Encoder](https://github.com/ethauvin/urlencoder) | URL string handling |
+| Testing   | [Mokkery](https://github.com/lupuuss/Mokkery) | mock object / interface |
+
+## Project Structure
+
+    src/
+    ├── ...  
+    ├── composeApp               
+    │   ├── androidMain         # Android-specific code
+    │   ├── iosMain             # iOS-specific code
+    │   └── commonMain          # Shared KMP code
+    └── ...
+
+### Architecture Overview
+- Based on the [Android Sunflower](https://github.com/android/sunflower) reference architecture
+- Basic MVVM Architecture Diagram
+<img width="549" alt="image" src="https://github.com/user-attachments/assets/6df63676-b473-4cb3-9e4f-ebb20f697030">
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Data Management
 
-## Project Structure:
-It follows the basic project structure established by the official Android app  [sunflower](https://github.com/android/sunflower)
+### API Integration
+- Endpoint: https://the-podcasts.fly.dev/
+- Features:
+  - Podcast listings
+  - Episode details
+- Implementation: Ktor HTTP Client
 
-## Screen Flow:
-<img width="647" alt="image" src="https://github.com/user-attachments/assets/21e2bf94-d2c4-4fd6-93b9-f018f08faf2d">
+### Local Storage
+- Technology: Room Database
+- Schema:
+  - `Favourite` table (podcast bookmarks)
+  - Related entity relationships
 
-## Libraries 
-| Library           | Used For                  | Remark |
-|-------------------|---------------------------| ------ |
-|[koin](https://insert-koin.io/docs/reference/koin-mp/kmp/)|DI| --- |
-|[ktor](https://ktor.io/) |Network| --- |
-|   [Coil](https://coil-kt.github.io/coil/)             | Image display           | ----| 
-|   [ethauvin-urlencoder](https://github.com/ethauvin/urlencoder)             | Url encode           | ----| 
-|   [valentinilk-shimmer](https://github.com/valentinilk/compose-shimmer)             | Display shimmer effect on compose           | ----| 
-|   [ROOM](https://developer.android.com/kotlin/multiplatform/room)            | local DB (RDB)           | ----| 
+## Navigation Flow
+![image](https://github.com/user-attachments/assets/b7c6fda9-2f01-4935-b9e9-8b697a744b94)
 
-## Completed
-1. Unit test - Episode List (ViewModel, repository, api)
-2. Some UI test of compose level
 
-## TODO
-1. Implement [Firebase Crashlyics](https://firebase.google.com/docs/crashlytics)
-2. Full testing (UI / unit test)
-3. ...
+## Development Setup
+
+1. Clone repository
+2. Open in Android Studio/Fleet
+3. Sync Gradle dependencies
+4. Build and run
+
+## Testing Status
+
+### Implemented Tests
+- Unit tests for Episode List:
+  - ViewModel
+  - Repository
+  - API layer
+- iOS Compose UI tests
+```bash
+./gradlew :composeApp:iosSimulatorArm64Test
+```
+
+## Roadmap
+### Planned Improvements
+1. Firebase Crashlytics integration
+2. Comprehensive test coverage
+3. Audio playback functionality
+
+## Diagram (using https://www.mermaidchart.com/)
+### Sequence Diagram of fetch pocast list from server
+![image](https://github.com/user-attachments/assets/722f2dfc-ce54-4590-abd1-a212819d1642)
+
+### Sequence Diagram of save / remove `Favourite` podcast 
+![image](https://github.com/user-attachments/assets/8858a558-85d2-4713-b24b-bc2e9ff3eb1e)
+
+

@@ -85,6 +85,8 @@ kotlin {
 
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            implementation("network.chaintech:cmptoast:1.0.4")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

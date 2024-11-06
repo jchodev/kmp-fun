@@ -14,6 +14,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.jerry.kmp.data.Episode
 import org.jerry.kmp.data.Podcast
+import org.jerry.kmp.data.database.entity.Favourite
 import org.jerry.kmp.data.remote.dto.EpisodeDTO
 import org.jerry.kmp.data.remote.dto.PodcastDTO
 import org.jerry.kmp.data.response.BasePaginationResponse
@@ -91,6 +92,15 @@ class MockStubs {
                 })
             }
         }
+
+        val mockFavourite = Favourite(
+            podcastId = 1L,
+            createdAt = 1L
+        )
+
+        val mockFavourites = listOf(
+            mockFavourite
+        )
     }
 }
 

@@ -36,6 +36,8 @@ roomCommon = "2.7.0-alpha01"
 ksp = "2.0.20-Beta1-1.0.22"
 sqlite = "2.5.0-SNAPSHOT"
 
+cmptoast = "1.0.4"
+
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -88,6 +90,8 @@ compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", ve
 core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtx" }
 ktor-client-mock  = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 kotlinx-coroutines-test  = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+
+cmptoast = { module = "network.chaintech:cmptoast", version.ref = "cmptoast" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

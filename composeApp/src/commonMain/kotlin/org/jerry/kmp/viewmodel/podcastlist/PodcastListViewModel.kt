@@ -20,12 +20,8 @@ class PodcastListViewModel(
     private val _podcastListState = MutableStateFlow(PodcastListState())
     val podcastListState = _podcastListState.asStateFlow()
 
-    private val _favourites = MutableStateFlow<List<Favourite>>(emptyList())
-    val favourites = _favourites.asStateFlow()
-
     init {
         getData()
-        getFavourites()
     }
 
     fun getData() {
@@ -38,7 +34,7 @@ class PodcastListViewModel(
                 when (result) {
                     is Resource.Success -> {
                         _podcastListState.value = podcastListState.value.copy(
-                            data =  result.data!!
+                            podcasts =  result.data!!
                         )
                     }
                     is Resource.Error -> {
@@ -48,36 +44,39 @@ class PodcastListViewModel(
                     }
                 }
             }
+            getFavourites()
             _podcastListState.value = podcastListState.value.copy(
                 isLoading = false
             )
         }
     }
 
-
-    private fun getFavourites() {
-        viewModelScope.launch {
+    private suspend fun getFavourites() {
+        try {
             favouriteRepository.getFavourites().let { favourites ->
-                _favourites.value = favourites
+                _podcastListState.value = podcastListState.value.copy(
+                    favourites =  favourites
+                )
             }
+        } catch (e: Exception) {
+            _podcastListState.value = podcastListState.value.copy(
+                favouriteError = e.message ?: "Get Favourites Error(Error code:100), please connect customer service",
+            )
         }
     }
 
     fun toggleFavourite(podcastId: Long) {
         viewModelScope.launch {
-            val existingFavourite = _favourites.value.find { it.podcastId == podcastId }
+            val existingFavourite = podcastListState.value.favourites.find { it.podcastId == podcastId }
             if (existingFavourite != null) {
                 favouriteRepository.deleteFavourite(existingFavourite.id)
             } else {
                 favouriteRepository.createFavourite(podcastId)
             }
-            getFavourites() // 重新獲取最新收藏列表
+            getFavourites()
         }
     }
 
-    fun isFavourite(podcastId: Long): Boolean {
-        return _favourites.value.any { it.podcastId == podcastId }
-    }
 
     fun clearError(){
         _podcastListState.value = podcastListState.value.copy(
@@ -88,6 +87,10 @@ class PodcastListViewModel(
 
 data class PodcastListState(
     val isLoading: Boolean = false,
-    val data: List<Podcast> = emptyList(),
-    val errorMessage: String? = null
+    val podcasts: List<Podcast> = emptyList(),
+    val errorMessage: String? = null,
+
+    //for favourite
+    val favourites: List<Favourite> = emptyList(),
+    val favouriteError: String? = null
 )

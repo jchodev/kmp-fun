@@ -11,6 +11,8 @@ class KmpApp : Application(), KoinComponent {
     override fun onCreate() {
         super.onCreate()
 
+        multiplatform.network.cmptoast.AppContext.apply { set(applicationContext) }
+
         initKoin {
             androidLogger()
             androidContext(this@KmpApp)
