@@ -1,19 +1,12 @@
-package org.jerry.kmp.compose.postcastlist
+package org.jerry.kmp.compose.podcastlist
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -24,11 +17,13 @@ import kmp_fun.composeapp.generated.resources.podcast_list_title
 import kmp_fun.composeapp.generated.resources.refresh
 import org.jerry.kmp.compose.common.AppTopBar
 import org.jerry.kmp.compose.common.ErrorDialog
+import org.jerry.kmp.compose.common.ErrorText
 import org.jerry.kmp.data.Podcast
 import org.jerry.kmp.data.database.entity.Favourite
 import org.jerry.kmp.viewmodel.podcastlist.PodcastListState
 import org.jerry.kmp.viewmodel.podcastlist.PodcastListViewModel
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -37,10 +32,8 @@ fun PodcastListScreen(
     onPodcastClick: (Podcast) -> Unit = {},
 ) {
     val state = viewModel.podcastListState.collectAsStateWithLifecycle().value
-    val favourites = viewModel.favourites.collectAsStateWithLifecycle().value
     PodcastListScreen(
         podcastListState = state,
-        favourites = favourites,
         onFavouriteClick = {
             viewModel.toggleFavourite(it)
         },
@@ -62,7 +55,6 @@ fun PodcastListScreen(
 fun PodcastListScreen(
     podcastListState: PodcastListState,
     onPodcastClick: (Podcast) -> Unit,
-    favourites: List<Favourite>,
     onFavouriteClick: (Long) -> Unit,
     onRefresh: () -> Unit,
     onErrorDismissRequest: () -> Unit,
@@ -86,55 +78,89 @@ fun PodcastListScreen(
         }
     ) {
         Box(modifier = Modifier.fillMaxSize().padding(it)){
-
-            PodcastListScreenContent(
-                podcasts = podcastListState.data,
-                onPodcastClick = onPodcastClick,
-                favourites = favourites,
-                onFavouriteClick = onFavouriteClick
-            )
-
-            if (podcastListState.isLoading) {
-                PodcastListLoadingScreen()
-            }
-
-            podcastListState.errorMessage?.let {
-                ErrorDialog(
-                    text = it,
-                    onRetryRequest = onRefresh,
-                    onDismissRequest = onErrorDismissRequest,
-                )
+            when {
+                podcastListState.isLoading -> {
+                    PodcastListLoadingScreen()
+                }
+                podcastListState.errorMessage != null -> {
+                    ErrorDialog(
+                        text = podcastListState.errorMessage,
+                        onRetryRequest = onRefresh,
+                        onDismissRequest = onErrorDismissRequest,
+                    )
+                }
+                else -> {
+                    PodcastListScreenContent(
+                        podcasts = podcastListState.podcasts,
+                        favourites = podcastListState.favourites,
+                        favouriteError = podcastListState.favouriteError,
+                        onPodcastClick = onPodcastClick,
+                        onFavouriteClick = onFavouriteClick,
+                    )
+                }
             }
         }
     }
 }
 
+@Preview
 @Composable
 private fun PodcastListScreenContent(
     podcasts: List<Podcast> = emptyList(),
     favourites: List<Favourite> = emptyList(),
+    favouriteError: String? = null,
     onPodcastClick: (Podcast) -> Unit = {},
     onFavouriteClick: (Long) -> Unit = {},
 ) {
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(
-            horizontal = 12.dp,
-            vertical = 24.dp
-        )
-    ) {
-        items(
-            items = podcasts,
-            key = { it.id }
-        ) { podcast ->
-            val isFavourite = favourites.any { it.podcastId == podcast.id }
-            PodcastListItemView(
-                podcast = podcast,
-                isFavourite = isFavourite,
-                onFavouriteClick = { onFavouriteClick(podcast.id) },
-                onClick = { onPodcastClick(podcast) }
+    Column (modifier = Modifier.fillMaxSize() ){
+        if (favouriteError != null) {
+            ErrorText(
+                modifier = Modifier.padding(vertical = 8.dp),
+                text  = favouriteError
             )
         }
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            contentPadding = PaddingValues(
+                horizontal = 12.dp,
+                vertical = 24.dp
+            )
+        ) {
+
+            items(
+                items = podcasts,
+                key = { it.id }
+            ) { podcast ->
+                val isFavourite = favourites.any { it.podcastId == podcast.id }
+                PodcastListItemView(
+                    podcast = podcast,
+                    isFavourite = isFavourite,
+                    onFavouriteClick = { onFavouriteClick(podcast.id) },
+                    onClick = { onPodcastClick(podcast) },
+                    visibleFavourite = favouriteError == null
+                )
+            }
+        }
     }
+
 }
 
+@Preview
+@Composable
+fun PodcastListScreenContentPreview(){
+    PodcastListScreenContent(
+        favouriteError = "this is error messaage",
+        podcasts = listOf(
+            Podcast(),
+            Podcast(),
+            Podcast(),
+            Podcast(),
+        )
+    )
+}
+
+@Preview
+@Composable
+fun PodcastListScreenContentPreview2(){
+    Text("this is preview test")
+}

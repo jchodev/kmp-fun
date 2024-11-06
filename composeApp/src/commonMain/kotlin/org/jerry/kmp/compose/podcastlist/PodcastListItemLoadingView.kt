@@ -1,4 +1,4 @@
-package org.jerry.kmp.compose.postcastlist
+package org.jerry.kmp.compose.podcastlist
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

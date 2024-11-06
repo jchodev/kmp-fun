@@ -1,4 +1,4 @@
-package org.jerry.kmp.compose.postcastlist
+package org.jerry.kmp.compose.podcastlist
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -30,7 +30,8 @@ fun PodcastListItemView(
     podcast: Podcast,
     isFavourite: Boolean,
     onFavouriteClick: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    visibleFavourite: Boolean,
 ) {
     Column(
         modifier = Modifier
@@ -55,22 +56,23 @@ fun PodcastListItemView(
                 }
             )
 
-            // 收藏按鈕
-            IconButton(
-                onClick = onFavouriteClick,
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(4.dp)
-            ) {
-                Icon(
-                    imageVector = if (isFavourite) {
-                        Icons.Filled.Favorite
-                    } else {
-                        Icons.Outlined.FavoriteBorder
-                    },
-                    contentDescription = if (isFavourite) "Remove from favourites" else "Add to favourites",
-                    tint = if (isFavourite) Color.Red else Color.Gray
-                )
+            if (visibleFavourite) {
+                IconButton(
+                    onClick = onFavouriteClick,
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(4.dp)
+                ) {
+                    Icon(
+                        imageVector = if (isFavourite) {
+                            Icons.Filled.Favorite
+                        } else {
+                            Icons.Outlined.FavoriteBorder
+                        },
+                        contentDescription = if (isFavourite) "Remove from favourites" else "Add to favourites",
+                        tint = if (isFavourite) Color.Red else Color.Gray
+                    )
+                }
             }
         }
 
