@@ -41,7 +41,8 @@ A cross-platform mobile application for browsing and bookmarking podcasts, built
 ### Architecture Overview
 - Based on the [Android Sunflower](https://github.com/android/sunflower) reference architecture
 - Basic MVVM Architecture Diagram
-<img width="549" alt="image" src="https://github.com/user-attachments/assets/6df63676-b473-4cb3-9e4f-ebb20f697030">
+
+![image](https://github.com/user-attachments/assets/f6722df6-b02a-40ee-aab2-0d2371369d11)
 
 
 ## Data Management
