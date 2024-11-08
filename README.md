@@ -51,7 +51,7 @@ A cross-platform mobile application for browsing and bookmarking podcasts, built
 - Endpoint: https://the-podcasts.fly.dev/
 - Features:
   - Podcast listings
-  - Episode details
+  - Episode list in podcast detail
 - Implementation: Ktor HTTP Client
 
 ### Local Storage
