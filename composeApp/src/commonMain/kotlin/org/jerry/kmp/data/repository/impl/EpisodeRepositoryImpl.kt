@@ -13,6 +13,17 @@ import org.jerry.kmp.utilities.ThrowableWithMessage
 class EpisodeRepositoryImpl(
     private val api: EpisodeApi
 ): EpisodeRepository {
+
+    //we can change one time only
+//    suspend fun getPodcastsByPodcastId2(podcastId: Long): Resource<List<Episode>> {
+//        return try {
+//            val response = api.getPodcastsByPodcastId(podcastId)
+//            Resource.Success(response.results.map { it.toEpisode() })
+//        } catch (e: Exception) {
+//            Resource.Error(ThrowableWithMessage(throwable = e))
+//        }
+//    }
+
     override suspend fun getPodcastsByPodcastId(podcastId: Long): Flow<Resource<List<Episode>>> = flow{
         try {
             val response = api.getPodcastsByPodcastId(podcastId)
